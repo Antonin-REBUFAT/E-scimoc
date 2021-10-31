@@ -1,25 +1,34 @@
 package com.xiaowugui.e_scimoc.viewModel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.xiaowugui.e_scimoc.model.ComicsResponse
+import com.xiaowugui.e_scimoc.model.ApiStatus
+import com.xiaowugui.e_scimoc.model.Comics
 import com.xiaowugui.e_scimoc.service.MarvelApi
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class ComicsOverviewViewModel : ViewModel() {
 
-    private val _response = MutableLiveData<String>()
-    val response: LiveData<String>
-        get() = _response
+    /**
+     * status of the retrieving process
+     */
+    private val _status = MutableLiveData<ApiStatus>()
+
+    val status: LiveData<ApiStatus>
+        get() = _status
 
     /**
-     * Call getMarvelComics() on init so we can display status immediately.
+     * list of comics retrieved
+     */
+    private val _listComics= MutableLiveData<List<Comics>>()
+
+    val listComics: LiveData<List<Comics>>
+        get() = _listComics
+
+    /**
+     * Call getMarvelComics() on init to display status immediately.
      */
     init {
         getMarvelComics()
@@ -30,11 +39,18 @@ class ComicsOverviewViewModel : ViewModel() {
      */
     private fun getMarvelComics() {
         viewModelScope.launch {
+            _status.value = ApiStatus.LOADING
             try {
                 val comicsResponse = MarvelApi.retrofitService.getComics()
-                _response.value = comicsResponse.data.results[0].title
+                val listComics = comicsResponse.data.results
+
+                _status.value = ApiStatus.DONE
+                if (listComics.isNotEmpty()) {
+                    _listComics.value = listComics
+                }
             } catch (e: Exception){
-                _response.value = "Failure : ${e.message}"
+                _status.value = ApiStatus.ERROR
+                _listComics.value = ArrayList()
             }
         }
     }
