@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.xiaowugui.e_scimoc.model.Comics
 import com.xiaowugui.e_scimoc.databinding.ComicsItemViewBinding
 
-class ImageGridAdapter : ListAdapter<Comics, ImageGridAdapter.ImageGridAdapterViewHolder>(DiffCallback){
+class ImageGridAdapter( private val onClickListener: OnClickListener ) : ListAdapter<Comics, ImageGridAdapter.ImageGridAdapterViewHolder>(DiffCallback){
 
     class ImageGridAdapterViewHolder(private var binding: ComicsItemViewBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(comics: Comics) {
@@ -34,7 +34,14 @@ class ImageGridAdapter : ListAdapter<Comics, ImageGridAdapter.ImageGridAdapterVi
 
     override fun onBindViewHolder(holder: ImageGridAdapter.ImageGridAdapterViewHolder, position: Int) {
         val comics = getItem(position)
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(comics)
+        }
         holder.bind(comics)
+    }
+
+    class OnClickListener(val clickListener: (comics: Comics) -> Unit) {
+        fun onClick(comics: Comics) = clickListener(comics)
     }
 
 }

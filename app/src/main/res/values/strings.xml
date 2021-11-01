@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">E-scimoc</string>
+    <string name="detail_title">Comics-e</string>
+    <string name="display_sale_date">Publication : </string>
+    <string name="unknown">non disponible</string>
+    <string name="display_format">"Format : "</string>
+    <string name="display_page_count">"Nb page : "</string>
+    <string name="display_isbn">"ISBN : "</string>
+    <string name="display_price">"Prix : "</string>
+    <string name="price_formatter">%.2f $</string>
+    <string name="display_description">"Description : "</string>
+    <string name="display_series">Series :</string>
 </resources>

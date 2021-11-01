@@ -27,6 +27,12 @@ class ComicsOverviewViewModel : ViewModel() {
     val listComics: LiveData<List<Comics>>
         get() = _listComics
 
+
+    private val _navigateToSelectedComics = MutableLiveData<Comics>()
+
+    val navigateToSelectedComics: LiveData<Comics>
+        get() = _navigateToSelectedComics
+
     /**
      * Call getMarvelComics() on init to display status immediately.
      */
@@ -53,5 +59,13 @@ class ComicsOverviewViewModel : ViewModel() {
                 _listComics.value = ArrayList()
             }
         }
+    }
+
+    fun displayComicsDetails(comics: Comics) {
+        _navigateToSelectedComics.value = comics
+    }
+
+    fun displayComicsDetailsComplete() {
+        _navigateToSelectedComics.value = null
     }
 }
