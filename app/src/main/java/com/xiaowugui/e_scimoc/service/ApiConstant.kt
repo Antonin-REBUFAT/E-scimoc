@@ -10,6 +10,11 @@ class ApiConstant {
         const val BASE_URL = "https://gateway.marvel.com:443/v1/public/"
         val ts = Timestamp(System.currentTimeMillis()).time.toString()
 
+        /**
+         * limit of value to be returned by the api
+         */
+        const val limit = 100
+
 
         fun hash(): String {
             val input = "$ts${BuildConfig.MARVEL_API_KEY_PRIVATE}${BuildConfig.MARVEL_API_KEY}"

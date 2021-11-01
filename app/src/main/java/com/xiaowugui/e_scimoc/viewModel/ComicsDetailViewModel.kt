@@ -20,6 +20,8 @@ class ComicsDetailViewModel(comics: Comics, application: Application): AndroidVi
         _selectedComics.value = comics
     }
 
+    // Transformations for the view
+
     val displaySaleDate = Transformations.map(selectedComics) {
         if(it.onSaleDate.isEmpty()){
             application.applicationContext.getString(R.string.unknown)

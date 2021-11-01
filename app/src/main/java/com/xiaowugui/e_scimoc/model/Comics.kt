@@ -4,6 +4,9 @@ import android.os.Parcelable
 import com.squareup.moshi.FromJson
 import kotlinx.parcelize.Parcelize
 
+/**
+ * model of a comics
+ */
 @Parcelize
 data class Comics(
     val id: Int,
@@ -19,7 +22,7 @@ data class Comics(
 ) : Parcelable {
     object ADAPTER {
         /**
-         * Adapter to merge the thumbnail field
+         * Adapter to merge the thumbnail, the series, the dates and the price in a single field
          */
         data class ComicsWithThumbnail(
             val id: Int,

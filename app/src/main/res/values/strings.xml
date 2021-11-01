@@ -10,4 +10,7 @@
     <string name="price_formatter">%.2f $</string>
     <string name="display_description">"Description : "</string>
     <string name="display_series">Series :</string>
+    <string name="no_results">Aucun résultat</string>
+    <string name="search_hint">Titre comics</string>
+    <string name="retry">Réessayer</string>
 </resources>

@@ -9,7 +9,7 @@
         android:name="com.xiaowugui.e_scimoc.fragment.OverviewFragment"
         android:label="@string/app_name">
         <action
-            android:id="@+id/actio_show_comics_detail"
+            android:id="@+id/action_show_comics_detail"
             app:destination="@id/detailFragment" />
     </fragment>
     <fragment
